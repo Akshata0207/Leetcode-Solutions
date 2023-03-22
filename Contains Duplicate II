@@ -1,0 +1,39 @@
+Given an integer array nums and an integer k, return true if there are two distinct indices i and j in the array such that nums[i] == nums[j] and abs(i - j) <= k.
+
+ 
+
+Example 1:
+
+Input: nums = [1,2,3,1], k = 3
+Output: true
+Example 2:
+
+Input: nums = [1,0,1,1], k = 1
+Output: true
+Example 3:
+
+Input: nums = [1,2,3,1,2,3], k = 2
+Output: false
+
+Solution:
+
+class Solution {
+public:
+
+bool containsNearbyDuplicate(vector<int>&num,int k){
+
+unordered_map<int,list<int>>m;
+
+for(int i=0;i<num.size();i++){
+    if(m.find(num[i])!=m.end()){ //if find value 
+
+        for(auto node : m[num[i]]){ //from these index value 
+
+           if(abs(i-node)<=k) return true;  //0 index  - suppose 3index 1
+        }
+    }
+    m[num[i]].push_back(i);    //if not then push index as welll in map
+}
+return false ;
+}
+};
